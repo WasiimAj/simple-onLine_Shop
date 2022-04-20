@@ -1,0 +1,59 @@
+<%- include('parts/header.ejs') %>
+<title> LogIn </title>
+
+<%- include('parts/navbar.ejs') %>
+
+<div class="container">
+    <div class="row">
+        <div class="col col-3"></div>
+        
+        <div class="col col-6 mt-5">
+
+            <footer class="bg-light text-center text-lg-start">
+                <div class="text-center p-3" 
+                style="background-color: rgba(0, 0, 0, 0.2); border-radius: 3px; font-size: 20px; color: black; font-weight: bold;">
+                LogIn 
+                </div>
+            </footer>
+
+            <form action="/login" method="post">
+            <div class="form-floating mb-3 mt-3">
+                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email">
+                <label for="floatingInput">Email address</label>
+            </div>
+
+            <% let EmailError = validationErrors.find(err => err.param === 'email') %> 
+            <% if (EmailError) { %> 
+                <div class="alert alert-danger mt-3" role="alert">
+                    <%= EmailError.msg %> 
+                </div>
+            <% } %> 
+
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+                <label for="floatingPassword">Password</label>
+            </div>
+
+            <% let PasswordError = validationErrors.find(err => err.param === 'password') %> 
+            <% if (PasswordError) { %> 
+                <div class="alert alert-danger mt-3" role="alert">
+                    <%= PasswordError.msg %> 
+                </div>
+            <% } %> 
+
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-success mt-2 btn-lg ">LogIn</button>
+            </div>
+        </form>
+        <% if (AuthError) { %> 
+        <div class="alert alert-danger mt-3" role="alert">
+            <%= AuthError %> 
+        </div>
+        <% } %> 
+        </div>
+    </div>
+</div>
+
+
+<%- include('parts/footer.ejs') %> 
+

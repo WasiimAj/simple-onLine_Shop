@@ -1,0 +1,46 @@
+<%- include('parts/header.ejs') %>
+<%- include('parts/navbar.ejs') %>
+
+<title> Product </title>
+
+
+<div class="container mt-3">
+    <div class="row">
+      <% if (!productes) {%>
+        <div class="alert alert-danger mt-3" role="alert">
+          This product is no longer available!
+        </div>
+      <% } else {%>  
+        <div class="col col-3">
+
+        </div>
+        <div class="col col-lg">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <img src="/<%= productes.image %>" class="img-fluid rounded-start" alt="...">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title"><%= productes.name %></h5>
+                      <p class="card-text"><%= productes.discription %> </p>
+
+                        <span class="badge rounded-pill bg-dark">Product Price </span>
+                        <span class="badge rounded-pill bg-success"><%= productes.price %> $</span>
+
+                    <form action="/cart" method="post" class="mt-3">
+                        <input type="number" class="form-control" placeholder="Amout">
+                        <button class="btn btn-primary mt-1 form-control">Add To Cart</button>
+                    </form>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+        <% } %> 
+    </div>
+</div>
+
+<%- include('parts/footer.ejs') %> 
+

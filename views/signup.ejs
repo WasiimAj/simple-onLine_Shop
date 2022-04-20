@@ -1,0 +1,81 @@
+<%- include('parts/header.ejs') %>
+<title> SignUp </title>
+<%- include('parts/navbar.ejs') %> 
+
+<div class="container">
+    <div class="row">
+        <div class="col col-3"></div>
+        
+        <div class="col col-6 mt-5">
+
+            <footer class="bg-light text-center text-lg-start">
+                <div class="text-center p-3" 
+                style="background-color: rgba(0, 0, 0, 0.2); border-radius: 3px; font-size: 20px; color: black; font-weight: bold;">
+                SignUp 
+                </div>
+            </footer>
+
+            <form action="/signup" method="post">
+            <div class="form-floating mb-3 mt-3">
+                <input name="user_name" type="text" class="form-control" id="floatingInput" placeholder="name123">
+                <label for="floatingInput">User Name</label>
+            </div>
+
+            <% let userNameError = validationErrors.find(err => err.param === 'user_name') %> 
+            <% if (userNameError) { %> 
+                <div class="alert alert-danger mt-3" role="alert">
+                    <%= userNameError.msg %> 
+                </div>
+            <% } %> 
+
+            <div class="form-floating mb-3 mt-3">
+                <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Email address</label>
+            </div>
+
+            <% let EmailError = validationErrors.find(err => err.param === 'email') %> 
+            <% if (EmailError) { %> 
+                <div class="alert alert-danger mt-3" role="alert">
+                    <%= EmailError.msg %> 
+                </div>
+            <% } %> 
+
+            <div class="form-floating">
+                <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Password</label>
+            </div>
+
+            <% let passwordError = validationErrors.find(err => err.param === 'password') %> 
+            <% if (passwordError) { %> 
+                <div class="alert alert-danger mt-3" role="alert">
+                    <%= passwordError.msg %> 
+                </div>
+            <% } %> 
+
+            <div class="form-floating">
+                <input name="confairmPassword" type="password" class="form-control mt-3" id="floatingPassword" placeholder="Confairm Password">
+                <label for="floatingPassword">Confairm Password</label>
+            </div>
+
+            <% let CpasswordError = validationErrors.find(err => err.param === 'confairmPassword') %> 
+            <% if (CpasswordError) { %> 
+                <div class="alert alert-danger mt-3" role="alert">
+                    <%= CpasswordError.msg %> 
+                </div>
+            <% } %> 
+
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-success mt-2 btn-lg ">SignUp</button>
+            </div>
+        </form>
+
+        <% if (AuthError) { %> 
+            <div class="alert alert-danger mt-3" role="alert">
+                <%= AuthError %> 
+            </div>
+        <% } %>
+        </div>
+    </div>
+</div>
+
+<%- include('parts/footer.ejs') %> 

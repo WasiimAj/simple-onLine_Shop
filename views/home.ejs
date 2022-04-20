@@ -1,0 +1,77 @@
+    <%- include('parts/header.ejs') %>
+    <title> Home </title>
+    <%- include('parts/navbar.ejs') %> 
+
+
+        <form action="/" method="get">    
+            <div class="container mt-2">
+                <div class="row">
+                    <div class="col col-8">
+                        <select class="form-select" name="category" aria-label="Default select example">
+                            <option value="all"> All </option>
+                            <option value="graphic card"> Graphic Card </option>
+                            <option value="radiator"> Radiator </option>
+                            <option value="gaming chair"> Gaming Chair </option>
+                            <option value="keybord"> Keybord </option>
+                            <option value="mouse"> Mouse </option>
+                        </select>
+                    </div>
+                    <div class="col col-4">
+                        <button type="submit" class="btn btn-dark">Filter</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <% if (validationErrors) { %> 
+    <div class="container">
+        <div class="alert alert-danger mt-3" role="alert">
+            <%= validationErrors.msg %>
+        </div>
+    </div>
+        <% } %> 
+    
+    <div class="container">
+        <div class="row">
+
+            <% if (productes.length >= 1) { %> 
+
+                <% for (productes of productes) { %> 
+                    <div class="col col-12 col-md-6 col-lg-4 col-xl-3">
+    
+                        <div class="card m-1" style="width: 18rem;">
+                            <img src="<%= productes.image %> " class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title" style="color: #0076ff;"><a style="text-decoration: none;" href="/product/<%= productes._id %>"><%= productes.name %></a></h5>
+                                <p class="card-text" style="font-weight:bold; color:#19784c;">Price <%= productes.price %>$</p>
+                                
+                                <form action="/cart" method="post">
+                                
+                                    <input type="number" name="amount" class="form-control" placeholder="Amout">
+                                    <input type="hidden" name="name" value="<%= productes.name %>">
+                                    <input type="hidden" name="price" value="<%= productes.price %>">
+                                    <input type="hidden" name="productID" value="<%= productes._id %>">
+                                    <input type="hidden" name="redirectTo" value="/">
+
+
+                                    <button type="submit" class="btn btn-primary mt-1 form-control">Add To Cart</button>
+                                </form>
+                            </div>
+                        </div>                
+                    </div>
+                    <% } %> 
+                
+            <% } else { %>
+                <div class="alert alert-danger mt-3" role="alert">
+                    There Is No Productes!
+                </div>
+            <% } %> 
+
+
+
+        </div>
+    </div>
+
+
+    <%- include('parts/footer.ejs') %> 
+

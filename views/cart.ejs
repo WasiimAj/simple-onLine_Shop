@@ -1,0 +1,50 @@
+<%- include('parts/header.ejs') %>
+<title> Cart </title>
+
+<%- include('parts/navbar.ejs') %> 
+
+
+<% if(iteams.length === 0) { %> 
+    <div class="container">
+        <p class="alert alert-danger mt-3" role="alert">
+            There Is No Iteams
+        </p>
+    </div>
+<% } else { %> 
+
+
+        <% for (let i = 0; i < iteams.length; i++ ) { %> 
+
+            <table class="table container mt-5">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Delete Product</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row"><%= i+1 %> </th>
+                        <td><%= iteams[i].name %> </td>
+                        <td><%= iteams[i].price %>$</td>
+                        <td><%= iteams[i].amount %></td>
+                        <td><%= iteams[i].price * iteams[i].amount %>$</td>
+                        <td>
+                            <form method="post">
+                                <input type="hidden" name="cardID" value="<%= iteams[i]._id %>">
+                                <input type="submit" class="btn btn-danger" value="Delete" formaction="/cart/delete">
+                            </form>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+        <% } %>          
+    <% } %>     
+
+
+<%- include('parts/footer.ejs') %> 
+
